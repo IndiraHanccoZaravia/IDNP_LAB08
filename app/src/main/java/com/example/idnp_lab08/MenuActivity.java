@@ -13,19 +13,23 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MenuActivity extends AppCompatActivity {
     private static final String TAG = "MenuActivity";
-    public final static String EXTRA_POSTULANTES = "EXTRA_POSTULANTES";
-    private ArrayList<Postulante> postulantes;
+    //public final static String EXTRA_POSTULANTES = "EXTRA_POSTULANTES";
+    //private ArrayList<Postulante> postulantes;
+    //private static final String FILE_NAME = "datos";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        postulantes = new ArrayList<>();
-        initData();
+        //postulantes = new ArrayList<>();
+        //initData();
 
         Button btnInfPostulante = findViewById(R.id.btnPostulante);
         Button btnNuevo = findViewById(R.id.btnNuevo);
@@ -34,20 +38,21 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PostulanteregistroActivity.class);
-                startForResult.launch(intent);
+                //startForResult.launch(intent);
+                startActivity(intent);
             }
         });
         btnInfPostulante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), PostulanteinfActivity.class);
-                intent.putParcelableArrayListExtra(EXTRA_POSTULANTES, postulantes);
+                //intent.putParcelableArrayListExtra(EXTRA_POSTULANTES, postulantes);
                 startActivity(intent);
             }
         });
     }
 
-    private void initData(){
+    /*private void initData(){
         Postulante postulante =new Postulante();
         postulante.setDni("200");
         postulante.setApeMaterno("Torres");
@@ -58,9 +63,9 @@ public class MenuActivity extends AppCompatActivity {
         postulante.setCarrera("Mecanica");
 
         postulantes.add(postulante);
-    }
+    }*/
 
-    ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+    /*ActivityResultLauncher<Intent> startForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
@@ -73,5 +78,5 @@ public class MenuActivity extends AppCompatActivity {
                         postulantes.add(postulante);
                     }
                 }
-            });
+            });*/
 }

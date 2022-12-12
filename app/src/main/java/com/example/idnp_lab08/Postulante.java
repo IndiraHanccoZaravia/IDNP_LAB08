@@ -60,13 +60,13 @@ public class Postulante implements Parcelable {
 
     @Override
     public String toString() {
-        return "\nApellido paterno: " + apePaterno +
-                "\nApellido materno: " + apeMaterno +
-                "\nNombres: " + nombres +
-                "\nDni: " + dni +
-                "\nFecha de nacimiento: " + fecha +
-                "\nColegio de procedencia: " + colegio +
-                "\nCarrera a la que postula: " + carrera;
+        return "Apellido paterno: " + apePaterno +
+                ", Apellido materno: " + apeMaterno +
+                ", Nombres: " + nombres +
+                ", Dni: " + dni +
+                ", Fecha de nacimiento: " + fecha +
+                ", Colegio de procedencia: " + colegio +
+                ", Carrera a la que postula: " + carrera+ "\n";
     }
 
     @Override
