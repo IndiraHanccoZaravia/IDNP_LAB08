@@ -56,8 +56,6 @@ public class Postulante implements Parcelable {
     public String getCarrera() {return carrera;}
 
 
-
-
     @Override
     public String toString() {
         return "Apellido paterno: " + apePaterno +
@@ -66,8 +64,9 @@ public class Postulante implements Parcelable {
                 ", Dni: " + dni +
                 ", Fecha de nacimiento: " + fecha +
                 ", Colegio de procedencia: " + colegio +
-                ", Carrera a la que postula: " + carrera+ "\n";
+                ", Carrera a la que postula: " + carrera+"\n";
     }
+
 
     @Override
     public int describeContents() {

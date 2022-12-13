@@ -11,13 +11,26 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
 public class Helper {
     private static final String FILE_NAME = "datos.txt";
+    private ArrayList<Postulante> Datos = new ArrayList<>();
 
-    public void writeToFile(Context context, Postulante p){
+    public void Agregar(Postulante postulante, ArrayList<Postulante> postulantes){
+        this.Datos = postulantes;
+        this.Datos.add(postulante);
+    }
+
+    public ArrayList<Postulante> getPostulante(){
+        return Datos;
+    }
+
+    public void writeToFile(Context context, ArrayList<Postulante> Datos){
         try (FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)) {
-            fos.write(p.toString().getBytes());
+            for(Postulante p : Datos)
+                fos.write(p.toString().getBytes());
+            //fos.flush();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -44,4 +57,6 @@ public class Helper {
             return stringBuilder.toString();
         }
     }
+
+
 }
