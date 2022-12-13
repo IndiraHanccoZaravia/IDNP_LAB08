@@ -3,38 +3,45 @@ package com.example.idnp_lab08;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 
 public class Helper {
     private static final String FILE_NAME = "datos.txt";
 
-    public void write(Context context, Postulante p){
-        File path = context.getFilesDir();
-        try {
-            FileOutputStream writer = new FileOutputStream( new File(path, "datos.txt"));
-            writer.write(p.toString().getBytes());
-            writer.close();
-            Toast.makeText(context, "Escrito en el archivo: datos.txt", Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
+    public void writeToFile(Context context, Postulante p){
+        try (FileOutputStream fos = context.openFileOutput(FILE_NAME, Context.MODE_PRIVATE)) {
+            fos.write(p.toString().getBytes());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public String read(Context context){
-        File path = context.getFilesDir();
-        File readFrom = new File(path, "datos.txt");
-        byte[] content = new byte[(int) readFrom.length()];
-
+    public String readToFile(Context context) {
+        StringBuilder stringBuilder = new StringBuilder();
         try {
-            FileInputStream stream = new FileInputStream(readFrom);
-            stream.read(content);
-            String cont = new String(content);
-            return new String(content);
-        } catch (Exception e){
+            FileInputStream fis = context.openFileInput(FILE_NAME);
+            InputStreamReader inputStreamReader = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            BufferedReader reader = new BufferedReader(inputStreamReader);
+            String line = reader.readLine();
+            while (line != null) {
+                stringBuilder.append(line).append('\n');
+                line = reader.readLine();
+            }
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return e.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            return stringBuilder.toString();
         }
     }
 }

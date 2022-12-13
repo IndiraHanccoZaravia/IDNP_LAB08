@@ -72,7 +72,7 @@ public class PostulanteinfActivity extends AppCompatActivity {
                 }*/
 
 
-                String content = helper.read(getApplicationContext());
+                String content = helper.readToFile(getApplicationContext());
                 txtresultado.setText(content);
 
 

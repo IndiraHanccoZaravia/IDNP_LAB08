@@ -67,7 +67,8 @@ public class PostulanteregistroActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }*/
 
-                helper.write(getApplicationContext(), p);
+                //helper.writeToFile(getApplicationContext(), p);
+                helper.writeToFile(getApplicationContext(), p);
 
 
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
