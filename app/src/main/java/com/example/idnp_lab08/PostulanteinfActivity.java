@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -24,6 +26,7 @@ public class PostulanteinfActivity extends AppCompatActivity {
 
     private static final String TAG = "PostulanteinfActivity";
     private ArrayList<Postulante> postulantes;
+    RecyclerView listaPostulantes;
 
     Helper helper = new Helper();
 
@@ -32,29 +35,23 @@ public class PostulanteinfActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postulanteinf);
 
+        listaPostulantes = findViewById(R.id.listaPostulantes);
+        listaPostulantes.setLayoutManager(new LinearLayoutManager(this));
+
+
+
         Intent intent = getIntent();
         postulantes = intent.getParcelableArrayListExtra(MenuActivity.EXTRA_POSTULANTES);
 
+
         Log.d(TAG, "size: "+postulantes.size());
 
-        Button btnBuscar = findViewById(R.id.btnBuscar);
-        EditText edtDni = findViewById(R.id.editTextBuscar);
-        TextView txtresultado = findViewById(R.id.txtResultado);
+        ListaPostulantesAdapter adapter = new ListaPostulantesAdapter(helper.readToFile(getApplicationContext()));
+        listaPostulantes.setAdapter(adapter);
 
-        btnBuscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String dni = edtDni.getText().toString();
-                for (Postulante postulante : postulantes) {
-                    Log.d(TAG, "postulante: "+postulante.toString());
-                    if(postulante.getDni().equals(dni)){
-                        txtresultado.setText(postulante.toString());
-                        Log.d(TAG, postulante.toString());
-                    }
-                    else{
-                        txtresultado.setText("Postulante no encontrado");
-                    }
-                }
+
+
+
 
                 //String content = helper.readToFile(getApplicationContext());
                 //txtresultado.setText(content);
@@ -71,7 +68,7 @@ public class PostulanteinfActivity extends AppCompatActivity {
                 } catch (Exception e){
                     e.printStackTrace();
                 }*/
-            }
-        });
+
+
     }
 }
